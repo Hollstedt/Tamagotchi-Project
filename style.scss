@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: 'Kamikaze';
-    src: url('Font/Kamikaze.ttf');
+    src: url('fonts/Kamikaze.ttf');
 }
 
 body {
@@ -16,6 +16,14 @@ body {
         display: flex;
         align-items: center;
         flex-direction: column;
+        
+        h1 {
+            font-family: 'Kamikaze';
+            font-size: 100px;
+            color: rgb(255, 0, 0);
+            letter-spacing: 10px;
+            padding: 3rem 0 4rem 0;
+        }
 
         .tamagotchi-container {
             display: flex;
@@ -28,6 +36,10 @@ body {
             border: 1px solid rgba(255, 255, 255, 0.18);
             padding: 1.25rem;
             border-radius: 8px;
+            // border-top-left-radius: 0.5rem;
+            // border-top-right-radius: 0.5rem;
+            // border-bottom-left-radius: 5rem;
+            // border-bottom-right-radius: 5rem;
 
             .input-field {
                 display: flex;
@@ -57,16 +69,22 @@ body {
                         justify-content: center;
                         align-items: center;
                         padding: 1rem;
-                        height: 50px;
-                        width: 50px;
+                        height: 60px;
+                        width: 60px;
                         border-radius: 50%;
-                        border: 3px solid rgb(255, 0, 0);
+                        border: 3px solid rgb(161, 0, 0);
                         background-color: rgb(199, 0, 37);
                         color: white;
                         text-transform: uppercase;
+                        cursor: pointer;
+                        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+                        font-weight: bolder;
 
                         &:active {
-                            background-color: rgb(143, 0, 26);
+                            background-color: rgb(165, 0, 30);
+                            border: none;
+                            outline: 3px solid rgb(199, 0, 37);
+                            color: rgb(175, 175, 175);
                         }
                     }
                 }
@@ -80,14 +98,6 @@ body {
             button {
                 padding: 0.3rem;
             }
-        }
-
-        h1 {
-            font-family: 'Kamikaze';
-            font-size: 100px;
-            color: rgb(255, 0, 0);
-            letter-spacing: 10px;
-            padding: 3rem 0 4rem 0;
         }
     }
 }

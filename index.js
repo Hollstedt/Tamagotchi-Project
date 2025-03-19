@@ -1,7 +1,5 @@
 // console.log("I am a trapped Tamagotchi. Hello? Help.");
 
-const tamagotchis = [];
-
 class Tamagotchi {
     constructor (name, animalType, energy, fullness, happiness) {
         this.name = name;
@@ -27,7 +25,11 @@ class Tamagotchi {
         this.fullness += 30;
         this.happiness += 5;
         this.energy -= 15;
-    }    
+    }
+
+    countdowntimer() {
+        ///// I AM HERE, going to add countdown timer onclick submitBtn
+    }
 }
 
 class Tamagotchi1 extends Tamagotchi {
@@ -83,6 +85,7 @@ let submitBtn = document.querySelector("#nameInputBtn");
 let tamagotchiField = document.querySelector(".textArea");
 
 
+
 submitBtn.addEventListener ("click", function() {
     let inputValue = document.querySelector("#nameInput").value;
     let selectValue = document.querySelector("#animalSelect").value;
@@ -97,14 +100,12 @@ submitBtn.addEventListener ("click", function() {
     } else if (selectValue === "tamagotchi4") {
         newPet = new Tamagotchi4(inputValue)
     }
-
-    tamagotchis.forEach
-
+    
     tamagotchiField.innerHTML = `
-        <p>Name: ${newPet.name}</p>
-        <p>Type: ${newPet.animalType}</p>
-        <p>Energy: ${newPet.energy}</p>
-        <p>Fullness: ${newPet.fullness}</p>
-        <p>Happiness: ${newPet.happiness}</p>
+    <p>Name: ${newPet.name}</p>
+    <p>Type: ${newPet.animalType}</p>
+    <p>Energy: ${newPet.energy}</p>
+    <p>Fullness: ${newPet.fullness}</p>
+    <p>Happiness: ${newPet.happiness}</p>
     `;
 });

@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Kamikaze";
-  src: url("Font/Kamikaze.ttf");
+  src: url("fonts/Kamikaze.ttf");
 }
 body {
   background-color: rgb(199, 0, 37);
@@ -15,6 +15,13 @@ body main {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+body main h1 {
+  font-family: "Kamikaze";
+  font-size: 100px;
+  color: rgb(255, 0, 0);
+  letter-spacing: 10px;
+  padding: 3rem 0 4rem 0;
 }
 body main .tamagotchi-container {
   display: flex;
@@ -54,16 +61,22 @@ body main .tamagotchi-container .tamagotchi-action-field .actionBtns button {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
-  border: 3px solid rgb(255, 0, 0);
+  border: 3px solid rgb(161, 0, 0);
   background-color: rgb(199, 0, 37);
   color: white;
   text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  font-weight: bolder;
 }
 body main .tamagotchi-container .tamagotchi-action-field .actionBtns button:active {
-  background-color: rgb(143, 0, 26);
+  background-color: rgb(165, 0, 30);
+  border: none;
+  outline: 3px solid rgb(199, 0, 37);
+  color: rgb(175, 175, 175);
 }
 body main .tamagotchi-container input {
   padding: 0.3rem;
@@ -71,11 +84,4 @@ body main .tamagotchi-container input {
 }
 body main .tamagotchi-container button {
   padding: 0.3rem;
-}
-body main h1 {
-  font-family: "Kamikaze";
-  font-size: 100px;
-  color: rgb(255, 0, 0);
-  letter-spacing: 10px;
-  padding: 3rem 0 4rem 0;
 }/*# sourceMappingURL=style.css.map */
