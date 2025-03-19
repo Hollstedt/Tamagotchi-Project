@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: peachpuff;
+}
+body main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body main .frosted-glass {
+  height: 350px;
+  width: 350px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  border-radius: 8px;
+}/*# sourceMappingURL=style.css.map */
