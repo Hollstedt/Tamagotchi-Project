@@ -1,5 +1,7 @@
 // console.log("I am a trapped Tamagotchi. Hello? Help.");
 
+let boxOfTamagotchis = [];
+
 class Tamagotchi {
     constructor (name, animalType, energy, fullness, happiness) {
         this.name = name;
@@ -27,8 +29,38 @@ class Tamagotchi {
         this.energy -= 15;
     }
 
-    countdowntimer() {
-        ///// I AM HERE, going to add countdown timer onclick submitBtn
+    startTimer() {
+        this.timer = setInterval(() => {
+            this.energy -= 15;
+            this.fullness -= 15;
+            this.happiness -= 15;
+            
+            if (this.energy <= 0 || this.fullness <= 0 || this.happiness <= 0) {
+                clearInterval(this.timer)
+                this.energy = 0;
+                this.fullness = 0;
+                this.happiness = 0;
+            }
+
+            tamagotchiField.innerHTML = `
+            <p>Name: ${this.name}</p>
+            <p>Type: ${this.animalType}</p>
+            <p>Energy: ${this.energy}</p>
+            <p>Fullness: ${this.fullness}</p>
+            <p>Happiness: ${this.happiness}</p>
+            `;
+
+        }, 1000);
+    }
+    
+    updateDisplay() {
+        tamagotchiField.innerHTML = `
+            <p>Name: ${this.name}</p>
+            <p>Type: ${this.animalType}</p>
+            <p>Energy: ${this.energy}</p>
+            <p>Fullness: ${this.fullness}</p>
+            <p>Happiness: ${this.happiness}</p>
+        `;
     }
 }
 
@@ -41,10 +73,6 @@ class Tamagotchi1 extends Tamagotchi {
         this.energy += 50;
         this.happiness -= 5;
         this.fullness -= 10;
-    }
-
-    abilities() {
-        return `This one is a sleeper! Gets much more energy from sleeping.`
     }
 }
 
@@ -81,16 +109,15 @@ class Tamagotchi4 extends Tamagotchi {
     }
 }
 
+
 let submitBtn = document.querySelector("#nameInputBtn");
 let tamagotchiField = document.querySelector(".textArea");
-
-
 
 submitBtn.addEventListener ("click", function() {
     let inputValue = document.querySelector("#nameInput").value;
     let selectValue = document.querySelector("#animalSelect").value;
     
-    let newPet;
+    let newPet;   
     if (selectValue === "tamagotchi1") {
         newPet = new Tamagotchi1(inputValue)
     } else if (selectValue === "tamagotchi2") {
@@ -108,4 +135,27 @@ submitBtn.addEventListener ("click", function() {
     <p>Fullness: ${newPet.fullness}</p>
     <p>Happiness: ${newPet.happiness}</p>
     `;
+
+    newPet.startTimer();
+    
+    let napBtn = document.querySelector("#napBtn");
+    let playBtn = document.querySelector("#playBtn");
+    let eatBtn = document.querySelector("#eatBtn");
+
+    napBtn.addEventListener ("click", () => {
+        newPet.nap();
+        newPet.updateDisplay();
+    });
+
+    playBtn.addEventListener ("click", () => {
+        newPet.play();
+        newPet.updateDisplay();
+    });
+
+    eatBtn.addEventListener ("click", () => {
+        newPet.eat();
+        newPet.updateDisplay();
+    });
+    
+    boxOfTamagotchis.push(newPet);
 });
