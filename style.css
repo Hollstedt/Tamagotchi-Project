@@ -23,7 +23,8 @@ body main h1 {
   letter-spacing: 10px;
   padding: 3rem 0 4rem 0;
 }
-body main .tamagotchi-container {
+body main .tamagotchi-container,
+body main .activity-log {
   display: flex;
   flex-direction: column;
   height: 350px;
@@ -35,28 +36,33 @@ body main .tamagotchi-container {
   padding: 1.25rem;
   border-radius: 8px;
 }
-body main .tamagotchi-container .input-field {
+body main .tamagotchi-container .input-field,
+body main .activity-log .input-field {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-bottom: 1.25rem;
   gap: 0.5rem;
 }
-body main .tamagotchi-container .input-field #input-field-lower-part {
+body main .tamagotchi-container .input-field #input-field-lower-part,
+body main .activity-log .input-field #input-field-lower-part {
   display: flex;
   gap: 0.5rem;
 }
-body main .tamagotchi-container .tamagotchi-action-field {
+body main .tamagotchi-container .tamagotchi-action-field,
+body main .activity-log .tamagotchi-action-field {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
 }
-body main .tamagotchi-container .tamagotchi-action-field .actionBtns {
+body main .tamagotchi-container .tamagotchi-action-field .actionBtns,
+body main .activity-log .tamagotchi-action-field .actionBtns {
   display: flex;
   justify-content: space-evenly;
 }
-body main .tamagotchi-container .tamagotchi-action-field .actionBtns button {
+body main .tamagotchi-container .tamagotchi-action-field .actionBtns button,
+body main .activity-log .tamagotchi-action-field .actionBtns button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,16 +78,26 @@ body main .tamagotchi-container .tamagotchi-action-field .actionBtns button {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   font-weight: bolder;
 }
-body main .tamagotchi-container .tamagotchi-action-field .actionBtns button:active {
+body main .tamagotchi-container .tamagotchi-action-field .actionBtns button:active,
+body main .activity-log .tamagotchi-action-field .actionBtns button:active {
   background-color: rgb(165, 0, 30);
   border: none;
   outline: 3px solid rgb(199, 0, 37);
   color: rgb(175, 175, 175);
 }
-body main .tamagotchi-container input {
+body main .tamagotchi-container input,
+body main .activity-log input {
   padding: 0.3rem;
   margin-right: 0.5rem;
 }
-body main .tamagotchi-container button {
+body main .tamagotchi-container button,
+body main .activity-log button {
   padding: 0.3rem;
+}
+body main .activity-log {
+  overflow-y: auto;
+  height: 175px;
+  max-height: 200px;
+  margin-top: 1rem;
+  font-family: monospace;
 }/*# sourceMappingURL=style.css.map */
