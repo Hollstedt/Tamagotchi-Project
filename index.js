@@ -45,12 +45,15 @@ class Tamagotchi {
             this.setLimit();
             
             if (this.energy <= 0 || this.fullness <= 0 || this.happiness <= 0) {
+                let disableAnimal = document.querySelector(`#animalSelect option[value="${this.animalType.toLowerCase().replace(' ', '')}"]`);
+                
                 clearInterval(this.timer)
                 this.energy = 0;
                 this.fullness = 0;
                 this.happiness = 0;
-                activityLog.innerHTML = `${this.name} just ran away.` + activityLog.innerHTML;
-                let disableAnimal = document.querySelector(`#animalSelect option[value="${this.animalType.toLowerCase().replace(' ', '')}"]`);
+                
+                activityLog.innerHTML = `<p>${this.name} just ran away.</p>` + activityLog.innerHTML;
+
                 if (disableAnimal) {
                     disableAnimal.disabled = true;
                 }
@@ -148,6 +151,12 @@ let activityLog = document.querySelector(".activity-log");
 submitBtn.addEventListener ("click", function() {
     let inputValue = document.querySelector("#nameInput").value;
     let selectValue = document.querySelector("#animalSelect").value;
+    let selectedAnimal = document.querySelector(`#animalSelect option[value="${selectValue}"]`);
+
+    if (selectedAnimal.disabled) {
+        alert("Hallå? Ditt djur är dött, remember?");
+        return;
+    }
     
     let newPet;   
     if (selectValue === "tamagotchi1") {
