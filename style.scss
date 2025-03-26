@@ -25,7 +25,8 @@ body {
             padding: 3rem 0 4rem 0;
         }
 
-        .tamagotchi-container {
+        .tamagotchi-container,
+        .activity-log {
             display: flex;
             flex-direction: column;
             height: 350px;
@@ -99,5 +100,13 @@ body {
                 padding: 0.3rem;
             }
         }
+
+        .activity-log {
+            overflow-y: auto;
+            height: 175px;
+            max-height: 200px;
+            margin-top: 1rem;
+            font-family: monospace;
+        }   
     }
 }
