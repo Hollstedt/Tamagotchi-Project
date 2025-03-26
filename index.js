@@ -154,7 +154,7 @@ submitBtn.addEventListener ("click", function() {
     let selectedAnimal = document.querySelector(`#animalSelect option[value="${selectValue}"]`);
 
     if (selectedAnimal.disabled) {
-        alert("Hallå? Ditt djur är dött, remember?");
+        alert(`Ditt djur har "sprungit iväg"!`);
         return;
     }
     
