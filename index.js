@@ -2,6 +2,8 @@
 
 let boxOfTamagotchis = [];
 let currentPet = null;
+let hardMode = false;
+
 
 class Tamagotchi {
     constructor (name, animalType, energy = 50, fullness = 50, happiness = 50) {
@@ -16,7 +18,6 @@ class Tamagotchi {
         this.energy += 40;
         this.happiness -= 10;
         this.fullness -= 10;
-
         this.setLimit();
     }
     
@@ -24,7 +25,6 @@ class Tamagotchi {
         this.happiness += 30;
         this.fullness -= 10;
         this.energy -= 10;
-
         this.setLimit();
     }
     
@@ -32,7 +32,6 @@ class Tamagotchi {
         this.fullness += 30;
         this.happiness += 5;
         this.energy -= 15;
-
         this.setLimit();
     }
 
@@ -41,7 +40,6 @@ class Tamagotchi {
             this.energy -= 15;
             this.fullness -= 15;
             this.happiness -= 15;
-
             this.setLimit();
             
             if (this.energy <= 0 || this.fullness <= 0 || this.happiness <= 0) {
@@ -66,7 +64,7 @@ class Tamagotchi {
             <p>Fullness: ${this.fullness}</p>
             <p>Happiness: ${this.happiness}</p>
             `;
-        }, 1000);
+        }, 10000);
     }
     
     updateDisplay() {
@@ -79,8 +77,8 @@ class Tamagotchi {
         `;
     }
 
-    clamp(num, lower, upper) {
-        return Math.min(Math.max(num, lower), upper);
+    clamp(value, lowerLimit, upperLimit) {
+        return Math.min(Math.max(value, lowerLimit), upperLimit);
     }
 
     setLimit() {
@@ -96,11 +94,14 @@ class Tamagotchi1 extends Tamagotchi {
     }
     
     nap() {
-        this.energy += 50;
-        this.happiness -= 5;
-        this.fullness -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.energy += 50;
+            this.happiness -= 5;
+            this.fullness -= 10;
+            this.setLimit();
+        } else {
+            super.nap();
+        }
     }
 }
 
@@ -108,12 +109,16 @@ class Tamagotchi2 extends Tamagotchi {
     constructor (name) {
         super (name, "Tamagotchi 2");
     }
-    eat() {
-        this.fullness += 40;
-        this.happiness += 5;
-        this.energy -= 20;
 
-        this.setLimit();
+    eat() {
+        if (hardMode) {
+            this.fullness += 40;
+            this.happiness += 5;
+            this.energy -= 20;
+            this.setLimit();
+        } else {
+            super.eat();
+        }
     }
 }
 
@@ -122,11 +127,14 @@ class Tamagotchi3 extends Tamagotchi {
         super (name, "Tamagotchi 3");
     }
     play() {
-        this.happiness += 40;
-        this.fullness -= 20;
-        this.energy -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.happiness += 40;
+            this.fullness -= 20;
+            this.energy -= 10;
+            this.setLimit();
+        } else {
+            super.play();
+        }
     }
 }
 
@@ -135,11 +143,14 @@ class Tamagotchi4 extends Tamagotchi {
         super (name, "Tamagotchi 4");
     }
     nap() {
-        this.energy += 60;
-        this.happiness -= 15;
-        this.fullness -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.energy += 60;
+            this.happiness -= 15;
+            this.fullness -= 10;
+            this.setLimit();
+        } else {
+            super.nap();
+        }
     }
 }
 
@@ -187,6 +198,8 @@ submitBtn.addEventListener ("click", function() {
 let napBtn = document.querySelector("#napBtn");
 let playBtn = document.querySelector("#playBtn");
 let eatBtn = document.querySelector("#eatBtn");
+let hardModeBtn = document.querySelector("#hardModeBtn");
+
 
 napBtn.addEventListener ("click", () => {
     if (currentPet) {
@@ -209,5 +222,19 @@ eatBtn.addEventListener ("click", () => {
         currentPet.eat();
         currentPet.updateDisplay();
         activityLog.innerHTML = `<p>${currentPet.name} had a little snack</p>` + activityLog.innerHTML;
+    }
+});
+
+hardModeBtn.addEventListener("click", () => {
+    hardMode = !hardMode;
+
+    if (hardMode) {
+        alert("Holy shit! Hard mode entered!!!!");
+        hardModeBtn.textContent = "Fuck!!! Take me back!!!";
+        document.body.classList.add("hard-mode");
+    } else {
+        alert("Thank God! Back to normal mode");
+        hardModeBtn.textContent = "Level HARD";
+        document.body.classList.remove("hard-mode");
     }
 });

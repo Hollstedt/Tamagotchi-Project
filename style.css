@@ -21,7 +21,7 @@ body main h1 {
   font-size: 100px;
   color: rgb(255, 0, 0);
   letter-spacing: 10px;
-  padding: 3rem 0 4rem 0;
+  padding: 3rem 0 2rem 0;
 }
 body main .tamagotchi-container,
 body main .activity-log {
@@ -100,4 +100,24 @@ body main .activity-log {
   max-height: 200px;
   margin-top: 1rem;
   font-family: monospace;
+}
+body main #hardModeBtn {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+}
+
+body.hard-mode {
+  animation: blink-background 0.4s infinite alternate;
+}
+
+@keyframes blink-background {
+  from {
+    background-color: rgb(199, 0, 37);
+  }
+  to {
+    background-color: rgb(161, 0, 30);
+  }
+}
+body.hard-mode h1 {
+  color: black;
 }/*# sourceMappingURL=style.css.map */
