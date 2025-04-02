@@ -45,9 +45,9 @@ class Tamagotchi {
             this.setLimit();
             
             if (this.energy <= 0 || this.fullness <= 0 || this.happiness <= 0) {
+                clearInterval(this.timer)
                 let disableAnimal = document.querySelector(`#animalSelect option[value="${this.animalType.toLowerCase().replace(' ', '')}"]`);
                 
-                clearInterval(this.timer)
                 this.energy = 0;
                 this.fullness = 0;
                 this.happiness = 0;
