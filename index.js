@@ -2,6 +2,8 @@
 
 let boxOfTamagotchis = [];
 let currentPet = null;
+let hardMode = false;
+
 
 class Tamagotchi {
     constructor (name, animalType, energy = 50, fullness = 50, happiness = 50) {
@@ -16,7 +18,6 @@ class Tamagotchi {
         this.energy += 40;
         this.happiness -= 10;
         this.fullness -= 10;
-
         this.setLimit();
     }
     
@@ -24,7 +25,6 @@ class Tamagotchi {
         this.happiness += 30;
         this.fullness -= 10;
         this.energy -= 10;
-
         this.setLimit();
     }
     
@@ -32,7 +32,6 @@ class Tamagotchi {
         this.fullness += 30;
         this.happiness += 5;
         this.energy -= 15;
-
         this.setLimit();
     }
 
@@ -41,12 +40,10 @@ class Tamagotchi {
             this.energy -= 15;
             this.fullness -= 15;
             this.happiness -= 15;
-
             this.setLimit();
             
             if (this.energy <= 0 || this.fullness <= 0 || this.happiness <= 0) {
-                clearInterval(this.timer)
-                let disableAnimal = document.querySelector(`#animalSelect option[value="${this.animalType.toLowerCase().replace(' ', '')}"]`);
+                let disableAnimal = document.querySelector(`.animal-select option[value="${this.animalType.toLowerCase().replace(' ', '')}"]`);
                 
                 this.energy = 0;
                 this.fullness = 0;
@@ -79,8 +76,8 @@ class Tamagotchi {
         `;
     }
 
-    clamp(num, lower, upper) {
-        return Math.min(Math.max(num, lower), upper);
+    clamp(value, lowerLimit, upperLimit) {
+        return Math.min(Math.max(value, lowerLimit), upperLimit);
     }
 
     setLimit() {
@@ -96,11 +93,14 @@ class Tamagotchi1 extends Tamagotchi {
     }
     
     nap() {
-        this.energy += 50;
-        this.happiness -= 5;
-        this.fullness -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.energy += 50;
+            this.happiness -= 5;
+            this.fullness -= 10;
+            this.setLimit();
+        } else {
+            super.nap();
+        }
     }
 }
 
@@ -108,12 +108,16 @@ class Tamagotchi2 extends Tamagotchi {
     constructor (name) {
         super (name, "Tamagotchi 2");
     }
-    eat() {
-        this.fullness += 40;
-        this.happiness += 5;
-        this.energy -= 20;
 
-        this.setLimit();
+    eat() {
+        if (hardMode) {
+            this.fullness += 40;
+            this.happiness += 5;
+            this.energy -= 20;
+            this.setLimit();
+        } else {
+            super.eat();
+        }
     }
 }
 
@@ -122,11 +126,14 @@ class Tamagotchi3 extends Tamagotchi {
         super (name, "Tamagotchi 3");
     }
     play() {
-        this.happiness += 40;
-        this.fullness -= 20;
-        this.energy -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.happiness += 40;
+            this.fullness -= 20;
+            this.energy -= 10;
+            this.setLimit();
+        } else {
+            super.play();
+        }
     }
 }
 
@@ -135,26 +142,29 @@ class Tamagotchi4 extends Tamagotchi {
         super (name, "Tamagotchi 4");
     }
     nap() {
-        this.energy += 60;
-        this.happiness -= 15;
-        this.fullness -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.energy += 60;
+            this.happiness -= 15;
+            this.fullness -= 10;
+            this.setLimit();
+        } else {
+            super.nap();
+        }
     }
 }
 
 
-let submitBtn = document.querySelector("#nameInputBtn");
-let tamagotchiField = document.querySelector(".textArea");
-let activityLog = document.querySelector(".activity-log");
+let submitBtn = document.querySelector(".create-btn");
+let tamagotchiField = document.querySelector(".display-area");
+let activityLog = document.querySelector(".log-area");
 
 submitBtn.addEventListener ("click", function() {
-    let inputValue = document.querySelector("#nameInput").value;
-    let selectValue = document.querySelector("#animalSelect").value;
-    let selectedAnimal = document.querySelector(`#animalSelect option[value="${selectValue}"]`);
+    let inputValue = document.querySelector(".name-input").value;
+    let selectValue = document.querySelector(".animal-select").value;
+    let selectedAnimal = document.querySelector(`.animal-select option[value="${selectValue}"]`);
 
     if (selectedAnimal.disabled) {
-        alert("Hallå? Ditt djur är dött, remember?");
+        alert(`Ditt djur har "sprungit iväg"!`);
         return;
     }
     
@@ -184,9 +194,11 @@ submitBtn.addEventListener ("click", function() {
     boxOfTamagotchis.push(newPet);
 });
 
-let napBtn = document.querySelector("#napBtn");
-let playBtn = document.querySelector("#playBtn");
-let eatBtn = document.querySelector("#eatBtn");
+let napBtn = document.querySelector(".nap-btn");
+let playBtn = document.querySelector(".play-btn");
+let eatBtn = document.querySelector(".eat-btn");
+let hardModeBtn = document.querySelector("#hardModeBtn");
+
 
 napBtn.addEventListener ("click", () => {
     if (currentPet) {
