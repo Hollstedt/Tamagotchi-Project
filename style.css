@@ -53,13 +53,13 @@ h1 {
 .tamagotchi {
   display: none;
   flex-direction: column;
-  height: 550px; /* Increased height */
-  width: 400px; /* Increased width */
+  height: 550px;
+  width: 400px;
   background: rgba(223, 223, 223, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 1.5rem; /* Increased padding */
+  padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1rem;
 }

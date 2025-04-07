@@ -52,7 +52,7 @@ class Tamagotchi {
                 this.updateDisplay();
                 clearInterval(this.timer);
     
-                activityLog.innerHTML = `<p>${this.name} har sprungit iväg på grund av misskötsel.</p>` + activityLog.innerHTML;
+                activityLog.innerHTML = `<p>${this.name} ran away due to neglect.</p>` + activityLog.innerHTML;
     
                 setTimeout(() => {
                     boxOfTamagotchis[this.slot] = null;
