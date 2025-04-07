@@ -10,31 +10,71 @@
 <body>
     <main>
         <h1>Tamagotchi</h1>
-        <div class="tamagotchi-container">
+        
+        <div class="input-field-container">
             <div class="input-field">
                 <div id="input-field-upper-part">
-                    <label for="nameInput"><input id="nameInput" type="text" placeholder="Name your pet"></label>
+                    <label for="nameInput"><input id="nameInput" class="name-input" type="text" placeholder="Name your pet"></label>
                 </div>
                 <div id="input-field-lower-part">
-                    <select name="" id="animalSelect">
-                        <option value="tamagotchi1">Tamagotchi 1</option>
-                        <option value="tamagotchi2">Tamagotchi 2</option>
-                        <option value="tamagotchi3">Tamagotchi 3</option>
-                        <option value="tamagotchi4">Tamagotchi 4</option>
+                    <select class="animal-select">
+                        <option value="tamagotchi1">The Ant</option>
+                        <option value="tamagotchi2">The Ant-est</option>
+                        <option value="tamagotchi3">The Ant-est-est</option>
+                        <option value="tamagotchi4">The Aant</option>
                     </select>
-                    <button id="nameInputBtn">Enter pet</button>
-                </div>
-            </div>
-            <div class="tamagotchi-action-field">
-                <div class="textArea"></div>
-                <div class="actionBtns">
-                    <button id="napBtn">Nap</button>
-                    <button id="playBtn">Play</button>
-                    <button id="eatBtn">Eat</button>
+                    <button class="create-btn">Enter pet</button>
+                    <button class="reset-btn">Reset</button>
                 </div>
             </div>
         </div>
-        <div class="activity-log"></div>
+        
+        <div class="tamagotchi-container">
+            <div class="tamagotchi" id="slot1">
+                <div class="tamagotchi-action-field">
+                    <div class="display-area"></div>
+                    <div class="actionBtns">
+                        <button class="nap-btn">Nap</button>
+                        <button class="play-btn">Play</button>
+                        <button class="eat-btn">Eat</button>
+                    </div>
+                </div>
+                <div class="log-area"></div>
+            </div>
+            <div class="tamagotchi" id="slot2">
+                <div class="tamagotchi-action-field">
+                    <div class="display-area"></div>
+                    <div class="actionBtns">
+                        <button class="nap-btn">Nap</button>
+                        <button class="play-btn">Play</button>
+                        <button class="eat-btn">Eat</button>
+                    </div>
+                </div>
+                <div class="log-area"></div>
+            </div>
+            <div class="tamagotchi" id="slot3">
+                <div class="tamagotchi-action-field">
+                    <div class="display-area"></div>
+                    <div class="actionBtns">
+                        <button class="nap-btn">Nap</button>
+                        <button class="play-btn">Play</button>
+                        <button class="eat-btn">Eat</button>
+                    </div>
+                </div>
+                <div class="log-area"></div>
+            </div>
+            <div class="tamagotchi" id="slot4">
+                <div class="tamagotchi-action-field">
+                    <div class="display-area"></div>
+                    <div class="actionBtns">
+                        <button class="nap-btn">Nap</button>
+                        <button class="play-btn">Play</button>
+                        <button class="eat-btn">Eat</button>
+                    </div>
+                </div>
+                <div class="log-area"></div>
+            </div>
+        </div>
     </main>
 </body>
 </html>

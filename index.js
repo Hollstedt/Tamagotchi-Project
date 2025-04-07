@@ -1,7 +1,4 @@
-// console.log("I am a trapped Tamagotchi. Hello? Help.");
-
-let boxOfTamagotchis = [];
-let currentPet = null;
+let hardMode = false;
 
 class Tamagotchi {
     constructor (name, animalType, energy = 50, fullness = 50, happiness = 50) {
@@ -10,30 +7,31 @@ class Tamagotchi {
         this.energy = energy;
         this.fullness = fullness;
         this.happiness = happiness;
+        this.slot = null;
     }
 
     nap() {
         this.energy += 40;
         this.happiness -= 10;
         this.fullness -= 10;
-
         this.setLimit();
+        this.updateDisplay();
     }
     
     play() {
         this.happiness += 30;
         this.fullness -= 10;
         this.energy -= 10;
-
         this.setLimit();
+        this.updateDisplay();
     }
     
     eat() {
         this.fullness += 30;
         this.happiness += 5;
         this.energy -= 15;
-
         this.setLimit();
+        this.updateDisplay();
     }
 
     startTimer() {
@@ -41,46 +39,49 @@ class Tamagotchi {
             this.energy -= 15;
             this.fullness -= 15;
             this.happiness -= 15;
-
             this.setLimit();
-            
+    
+            let slotElement = document.querySelector(`#slot${this.slot + 1}`);
+            let activityLog = slotElement.querySelector(".log-area");
+    
             if (this.energy <= 0 || this.fullness <= 0 || this.happiness <= 0) {
-                let disableAnimal = document.querySelector(`#animalSelect option[value="${this.animalType.toLowerCase().replace(' ', '')}"]`);
-                
-                clearInterval(this.timer)
                 this.energy = 0;
                 this.fullness = 0;
                 this.happiness = 0;
-                
-                activityLog.innerHTML = `<p>${this.name} just ran away.</p>` + activityLog.innerHTML;
-
-                if (disableAnimal) {
-                    disableAnimal.disabled = true;
-                }
+                this.updateDisplay();
+                clearInterval(this.timer);
+    
+                activityLog.innerHTML = `<p>${this.name} har sprungit iväg på grund av misskötsel.</p>` + activityLog.innerHTML;
+    
+                setTimeout(() => {
+                    boxOfTamagotchis[this.slot] = null;
+                    slotElement.classList.remove("active");
+                    slotElement.querySelector(".display-area").innerHTML = "";
+                    slotElement.querySelector(".log-area").innerHTML = "";
+                }, 3000);
+    
+                return;
             }
-
-            tamagotchiField.innerHTML = `
-            <p>Name: ${this.name}</p>
-            <p>Type: ${this.animalType}</p>
-            <p>Energy: ${this.energy}</p>
-            <p>Fullness: ${this.fullness}</p>
-            <p>Happiness: ${this.happiness}</p>
-            `;
-        }, 1000);
+    
+            this.updateDisplay();
+        }, 10000);
     }
     
     updateDisplay() {
+        let slotElement = document.querySelector(`#slot${this.slot + 1}`);
+        let tamagotchiField = slotElement.querySelector(".display-area");
+        
         tamagotchiField.innerHTML = `
-            <p>Name: ${this.name}</p>
-            <p>Type: ${this.animalType}</p>
-            <p>Energy: ${this.energy}</p>
-            <p>Fullness: ${this.fullness}</p>
-            <p>Happiness: ${this.happiness}</p>
+            <p><span class="label">Name:</span> ${this.name}</p>
+            <p><span class="label">Animal type:</span> ${this.animalType}</p>
+            <p><span class="label">Energy:</span> ${this.energy}</p>
+            <p><span class="label">Fullness:</span> ${this.fullness}</p>
+            <p><span class="label">Happiness:</span> ${this.happiness}</p>
         `;
     }
 
-    clamp(num, lower, upper) {
-        return Math.min(Math.max(num, lower), upper);
+    clamp(value, lowerLimit, upperLimit) {
+        return Math.min(Math.max(value, lowerLimit), upperLimit);
     }
 
     setLimit() {
@@ -92,122 +93,180 @@ class Tamagotchi {
 
 class Tamagotchi1 extends Tamagotchi {
     constructor (name) {
-        super (name, "Tamagotchi 1");
+        super (name, "The Ant");
     }
     
     nap() {
-        this.energy += 50;
-        this.happiness -= 5;
-        this.fullness -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.energy += 50;
+            this.happiness -= 5;
+            this.fullness -= 10;
+            this.setLimit();
+            this.updateDisplay();
+        } else {
+            super.nap();
+        }
     }
 }
 
 class Tamagotchi2 extends Tamagotchi {
     constructor (name) {
-        super (name, "Tamagotchi 2");
+        super (name, "The Ant-est");
     }
-    eat() {
-        this.fullness += 40;
-        this.happiness += 5;
-        this.energy -= 20;
 
-        this.setLimit();
+    eat() {
+        if (hardMode) {
+            this.fullness += 40;
+            this.happiness += 5;
+            this.energy -= 20;
+            this.setLimit();
+            this.updateDisplay();
+        } else {
+            super.eat();
+        }
     }
 }
 
 class Tamagotchi3 extends Tamagotchi {
     constructor (name) {
-        super (name, "Tamagotchi 3");
+        super (name, "The Ant-est-est");
     }
     play() {
-        this.happiness += 40;
-        this.fullness -= 20;
-        this.energy -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.happiness += 40;
+            this.fullness -= 20;
+            this.energy -= 10;
+            this.setLimit();
+            this.updateDisplay();
+        } else {
+            super.play();
+        }
     }
 }
 
 class Tamagotchi4 extends Tamagotchi {
     constructor (name) {
-        super (name, "Tamagotchi 4");
+        super (name, "The Aant");
     }
     nap() {
-        this.energy += 60;
-        this.happiness -= 15;
-        this.fullness -= 10;
-
-        this.setLimit();
+        if (hardMode) {
+            this.energy += 60;
+            this.happiness -= 15;
+            this.fullness -= 10;
+            this.setLimit();
+            this.updateDisplay();
+        } else {
+            super.nap();
+        }
     }
 }
 
+boxOfTamagotchis = [null, null, null, null];
 
-let submitBtn = document.querySelector("#nameInputBtn");
-let tamagotchiField = document.querySelector(".textArea");
-let activityLog = document.querySelector(".activity-log");
+let createBtn = document.querySelector(".create-btn");
+createBtn.addEventListener("click", createNewPet);
 
-submitBtn.addEventListener ("click", function() {
-    let inputValue = document.querySelector("#nameInput").value;
-    let selectValue = document.querySelector("#animalSelect").value;
-    let selectedAnimal = document.querySelector(`#animalSelect option[value="${selectValue}"]`);
-
-    if (selectedAnimal.disabled) {
-        alert(`Ditt djur har "sprungit iväg"!`);
+function createNewPet() {
+    let nameInput = document.querySelector(".name-input").value;
+    let selectValue = document.querySelector(".animal-select").value;
+    
+    if (!nameInput) {
+        alert("Du måste ge din Tamagotchi ett namn!");
         return;
     }
     
+    let freeSlot = boxOfTamagotchis.findIndex(slot => slot === null);
+    
+    if (freeSlot === -1) {
+        alert("Alla slots är fulla! Du kan inte skapa fler Tamagotchis just nu.");
+        return;
+    }
+    
+    let targetSlot = document.querySelector(`#slot${freeSlot + 1}`);
+    let tamagotchiField = targetSlot.querySelector(".display-area");
+    let activityLog = targetSlot.querySelector(".log-area");
+    
+    targetSlot.classList.add('active');
+    
     let newPet;   
     if (selectValue === "tamagotchi1") {
-        newPet = new Tamagotchi1(inputValue)
+        newPet = new Tamagotchi1(nameInput);
     } else if (selectValue === "tamagotchi2") {
-        newPet = new Tamagotchi2(inputValue)
+        newPet = new Tamagotchi2(nameInput);
     } else if (selectValue === "tamagotchi3") {
-        newPet = new Tamagotchi3(inputValue)
+        newPet = new Tamagotchi3(nameInput);
     } else if (selectValue === "tamagotchi4") {
-        newPet = new Tamagotchi4(inputValue)
+        newPet = new Tamagotchi4(nameInput);
     }
+    
+    newPet.slot = freeSlot;
+    
+    boxOfTamagotchis[freeSlot] = newPet;
     
     tamagotchiField.innerHTML = `
-    <p>Name: ${newPet.name}</p>
-    <p>Type: ${newPet.animalType}</p>
-    <p>Energy: ${newPet.energy}</p>
-    <p>Fullness: ${newPet.fullness}</p>
-    <p>Happiness: ${newPet.happiness}</p>
+    <p><span class="label">Name:</span> ${newPet.name}</p>
+    <p><span class="label">Animal type:</span> ${newPet.animalType}</p>
+    <p><span class="label">Energy:</span> ${newPet.energy}</p>
+    <p><span class="label">Fullness:</span> ${newPet.fullness}</p>
+    <p><span class="label">Happiness:</span> ${newPet.happiness}</p>
     `;
-
-    newPet.startTimer();
-
-    currentPet = newPet;
     
-    boxOfTamagotchis.push(newPet);
-});
+    activityLog.innerHTML = `<p>${newPet.name} enjoyed life for the first time!</p>` + activityLog.innerHTML;
+    
+    document.querySelector(".name-input").value = "";
+    
+    newPet.startTimer();
+}
 
-let napBtn = document.querySelector("#napBtn");
-let playBtn = document.querySelector("#playBtn");
-let eatBtn = document.querySelector("#eatBtn");
-
-napBtn.addEventListener ("click", () => {
-    if (currentPet) {
-        currentPet.nap();
-        currentPet.updateDisplay();
-        activityLog.innerHTML = `<p>You took a nap with ${currentPet.name}</p>` + activityLog.innerHTML;
-    }
+document.querySelectorAll(".tamagotchi").forEach((slot, index) => {
+    let napBtn = slot.querySelector(".nap-btn");
+    let playBtn = slot.querySelector(".play-btn");
+    let eatBtn = slot.querySelector(".eat-btn");
+    
+    napBtn.addEventListener("click", () => {
+        let pet = boxOfTamagotchis[index];
+        if (pet) {
+            pet.nap();
+            let activityLog = slot.querySelector(".log-area");
+            activityLog.innerHTML = `<p>You took a nap with ${pet.name}</p>` + activityLog.innerHTML;
+        }
+    });
+    
+    playBtn.addEventListener("click", () => {
+        let pet = boxOfTamagotchis[index];
+        if (pet) {
+            pet.play();
+            let activityLog = slot.querySelector(".log-area");
+            activityLog.innerHTML = `<p>You played with ${pet.name}</p>` + activityLog.innerHTML;
+        }
+    });
+    
+    eatBtn.addEventListener("click", () => {
+        let pet = boxOfTamagotchis[index];
+        if (pet) {
+            pet.eat();
+            let activityLog = slot.querySelector(".log-area");
+            activityLog.innerHTML = `<p>${pet.name} had a little snack</p>` + activityLog.innerHTML;
+        }
+    });
 });
+function resetGame() {
+    boxOfTamagotchis.forEach(pet => {
+        if (pet && pet.timer) {
+            clearInterval(pet.timer);
+            
+        }
+    });
+    
+    boxOfTamagotchis = [null, null, null, null];
+    
+    document.querySelectorAll(".tamagotchi").forEach(slot => {
+        slot.classList.remove('active');
+        slot.querySelector(".display-area").innerHTML = "";
+        slot.querySelector(".log-area").innerHTML = "";
+    });
+    
+    document.querySelector(".name-input").value = "";
+}
 
-playBtn.addEventListener ("click", () => {
-    if (currentPet) {
-        currentPet.play();
-        currentPet.updateDisplay();
-        activityLog.innerHTML = `<p>You played with ${currentPet.name}</p>` + activityLog.innerHTML;
-    }
-});
-
-eatBtn.addEventListener ("click", () => {
-    if (currentPet) {
-        currentPet.eat();
-        currentPet.updateDisplay();
-        activityLog.innerHTML = `<p>${currentPet.name} had a little snack</p>` + activityLog.innerHTML;
-    }
-});
+document.querySelector(".reset-btn").addEventListener("click", resetGame);
