@@ -64,13 +64,13 @@ h1 {
 .tamagotchi {
   display: none;
   flex-direction: column;
-  height: 350px;
-  width: 350px;
+  height: 550px;  /* Increased height */
+  width: 400px;   /* Increased width */
   background: $light-gray;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid $tamagotchi-gray-border;
-  padding: 1.25rem;
+  padding: 1.5rem;  /* Increased padding */
   border-radius: 8px;
   margin-bottom: 1rem;
 
@@ -86,6 +86,31 @@ h1 {
   }
 }
 
+.pet-image {
+  height: 200px;
+  width: 200px;
+  margin: 0 auto 1rem auto;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tamagotchi-img1 {
+  background-image: url(/images/gifs/headspin.gif);
+}
+
+.tamagotchi-img2 {
+  background-image: url('/images/gifs/justrun.gif');
+}
+
+.tamagotchi-img3 {
+  background-image: url('/images/gifs/panic.gif');
+}
+
+.tamagotchi-img4 {
+  background-image: url('/images/gifs/justClean.gif');
+}
+
 .actionBtns {
   display: flex;
   justify-content: space-evenly;
@@ -95,8 +120,8 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
     border: 3px solid $dark-red;
     background-color: $red;
@@ -125,11 +150,10 @@ button {
 }
 
 .display-area {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-family: sans-serif;
   color: white;
   font-weight: normal;
-
 }
 
 .display-area p span.label {
@@ -138,9 +162,9 @@ button {
 
 .log-area {
   overflow-y: auto;
-  height: 175px;
-  max-height: 200px;
-  margin-top: 1rem;
+  height: 200px; 
+  max-height: 225px; 
+  margin-top: 1.5rem;
   font-family: monospace;
   color: white;
 }
@@ -151,7 +175,6 @@ button {
   cursor: pointer;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  
 }
 
 .reset-btn {

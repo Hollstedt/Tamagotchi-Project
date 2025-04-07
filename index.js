@@ -8,6 +8,7 @@ class Tamagotchi {
         this.fullness = fullness;
         this.happiness = happiness;
         this.slot = null;
+        this.imageClass = "";
     }
 
     nap() {
@@ -56,7 +57,7 @@ class Tamagotchi {
                 setTimeout(() => {
                     boxOfTamagotchis[this.slot] = null;
                     slotElement.classList.remove("active");
-                    slotElement.querySelector(".display-area").innerHTML = "";
+                    slotElement.querySelector(".display-area").innerHTML = `<div class="pet-image"></div>`;
                     slotElement.querySelector(".log-area").innerHTML = "";
                 }, 3000);
     
@@ -72,6 +73,7 @@ class Tamagotchi {
         let tamagotchiField = slotElement.querySelector(".display-area");
         
         tamagotchiField.innerHTML = `
+            <div class="pet-image ${this.imageClass}"></div>
             <p><span class="label">Name:</span> ${this.name}</p>
             <p><span class="label">Animal type:</span> ${this.animalType}</p>
             <p><span class="label">Energy:</span> ${this.energy}</p>
@@ -94,6 +96,7 @@ class Tamagotchi {
 class Tamagotchi1 extends Tamagotchi {
     constructor (name) {
         super (name, "The Ant");
+        this.imageClass = "tamagotchi-img1";
     }
     
     nap() {
@@ -112,6 +115,7 @@ class Tamagotchi1 extends Tamagotchi {
 class Tamagotchi2 extends Tamagotchi {
     constructor (name) {
         super (name, "The Ant-est");
+        this.imageClass = "tamagotchi-img2";
     }
 
     eat() {
@@ -130,6 +134,7 @@ class Tamagotchi2 extends Tamagotchi {
 class Tamagotchi3 extends Tamagotchi {
     constructor (name) {
         super (name, "The Ant-est-est");
+        this.imageClass = "tamagotchi-img3";
     }
     play() {
         if (hardMode) {
@@ -147,6 +152,7 @@ class Tamagotchi3 extends Tamagotchi {
 class Tamagotchi4 extends Tamagotchi {
     constructor (name) {
         super (name, "The Aant");
+        this.imageClass = "tamagotchi-img4";
     }
     nap() {
         if (hardMode) {
@@ -204,6 +210,7 @@ function createNewPet() {
     boxOfTamagotchis[freeSlot] = newPet;
     
     tamagotchiField.innerHTML = `
+    <div class="pet-image ${newPet.imageClass}"></div>
     <p><span class="label">Name:</span> ${newPet.name}</p>
     <p><span class="label">Animal type:</span> ${newPet.animalType}</p>
     <p><span class="label">Energy:</span> ${newPet.energy}</p>
@@ -250,6 +257,7 @@ document.querySelectorAll(".tamagotchi").forEach((slot, index) => {
         }
     });
 });
+
 function resetGame() {
     boxOfTamagotchis.forEach(pet => {
         if (pet && pet.timer) {
@@ -262,7 +270,7 @@ function resetGame() {
     
     document.querySelectorAll(".tamagotchi").forEach(slot => {
         slot.classList.remove('active');
-        slot.querySelector(".display-area").innerHTML = "";
+        slot.querySelector(".display-area").innerHTML = `<div class="pet-image"></div>`;
         slot.querySelector(".log-area").innerHTML = "";
     });
     
